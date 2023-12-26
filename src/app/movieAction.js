@@ -1,16 +1,32 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {getTopRatedMovies, getTrendingMovies, getUpcomingMovies} from '../api';
+import {
+  getTopRatedMovies,
+  getTrendingMovies,
+  getUpcomingMovies,
+  getMovieDetails,
+  getMovieCredits,
+  getSimilarMovies,
+  getPersonDetails,
+  getMovieCreditsPerson,
+  getSearchMovies,
+} from '../api';
 import {
   setTopRatedState,
   setTrendingState,
   setUpcomingState,
+  setMovieDetailState,
+  setMovieCreditsState,
+  setSimilarMoviesState,
+  setPersonDetailState,
+  setPersonMovieCreditsState,
+  setSearchResultsState,
 } from './movieSlice';
+import {getPersonDetailState} from './movieSelector';
 
 export const GetTrendingMovies = createAsyncThunk(
   'movie/getTrendingMovies',
   async (_, {dispatch}) => {
     const response = await getTrendingMovies();
-    // console.log(JSON.stringify(response, null, 2));
     dispatch(setTrendingState(response.results));
   },
 );
@@ -18,7 +34,6 @@ export const GetUpcomingMovies = createAsyncThunk(
   'movie/getUpcomingMovies',
   async (_, {dispatch}) => {
     const response = await getUpcomingMovies();
-    // console.log(JSON.stringify(response, null, 2));
     dispatch(setUpcomingState(response.results));
   },
 );
@@ -26,7 +41,52 @@ export const GetTopRatedMovies = createAsyncThunk(
   'movie/getTopRatedMovies',
   async (_, {dispatch}) => {
     const response = await getTopRatedMovies();
-    // console.log(JSON.stringify(response, null, 2));
     dispatch(setTopRatedState(response.results));
+  },
+);
+
+export const GetMovieDetails = createAsyncThunk(
+  'movie/getMovieDetails',
+  async (id, {dispatch}) => {
+    const response = await getMovieDetails(id);
+    dispatch(setMovieDetailState(response));
+  },
+);
+
+export const GetMovieCredits = createAsyncThunk(
+  'movie/getMovieCredits',
+  async (id, {dispatch}) => {
+    const response = await getMovieCredits(id);
+    dispatch(setMovieCreditsState(response.cast));
+  },
+);
+
+export const GetSimilarMoviesState = createAsyncThunk(
+  'movie/getSimilarMovies',
+  async (id, {dispatch}) => {
+    const response = await getSimilarMovies(id);
+    dispatch(setSimilarMoviesState(response.results));
+  },
+);
+export const GetPersonDetails = createAsyncThunk(
+  'movie/getPersonDetails',
+  async (id, {dispatch}) => {
+    const response = await getPersonDetails(id);
+    dispatch(setPersonDetailState(response));
+  },
+);
+export const GetMovieCreditsPerson = createAsyncThunk(
+  'movie/getMovieCreditsPerson',
+  async (id, {dispatch}) => {
+    const response = await getMovieCreditsPerson(id);
+    dispatch(setPersonMovieCreditsState(response.cast));
+  },
+);
+
+export const GetSearchMovies = createAsyncThunk(
+  'movie/getSearchMovies',
+  async (id, {dispatch}) => {
+    const response = await getSearchMovies(id);
+    dispatch(setSearchResultsState(response.results));
   },
 );

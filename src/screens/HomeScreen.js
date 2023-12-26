@@ -26,9 +26,7 @@ const HomeScreen = () => {
   }, [dispatch]);
 
   const upcomingMovies = useSelector(getUpcomingState());
-  // console.log('upcoming', JSON.stringify(console.log(upcomingMovies, null, 4)));
   const topRatedMovies = useSelector(getTopRatedState());
-  console.log(JSON.stringify(topRatedMovies, null, 4));
   return (
     <View className="flex-1 bg-neutral-800">
       <SafeAreaView className="mb-3">

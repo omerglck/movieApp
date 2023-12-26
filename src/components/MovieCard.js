@@ -1,11 +1,15 @@
 import {View, Text, Image, TouchableOpacity, Dimensions} from 'react-native';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {AppScreens} from '../navigation/types';
 
 export default function MovieCard({movie}) {
   const {width, height} = Dimensions.get('window');
+  const navigation = useNavigation();
   // http://image.tmdb.org/t/p/w500
   return (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => navigation.navigate(AppScreens.Movie, {id: movie.id})}>
       <Image
         className="rounded-3xl"
         source={{
