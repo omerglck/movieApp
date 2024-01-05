@@ -43,7 +43,7 @@
 
 - Clicking on the cards redirects to the corresponding movie detail page.
 
-### Usage
+### Usage:
 
 - The app initially displays popular movies.
 
